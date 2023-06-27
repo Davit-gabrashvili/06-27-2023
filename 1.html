@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <label for="username">Username:</label>
+        <input type="text" id="username" placeholder="Username">
+    </div>
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" placeholder="Password">
+    </div>
+    <div>
+        <input type="checkbox" id="remember">
+        <label for="remember">Remember me</label>
+    </div>
+    <div>
+        <button onclick="saveLogin()">Login</button>
+    </div>
+
+    
+    <script>
+        function saveLogin() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            var remember = document.getElementById('remember')
+
+            if (remember.checked) {
+                localStorage.setItem('username', username);
+                localStorage.setItem('password', password);
+                localStorage.setItem('remember', true);
+            } else {
+                localStorage.removeItem('remember');
+            }
+        }
+
+
+        window.onload = function() {
+        var remember = localStorage.getItem('remember');
+        var usernameField = document.getElementById('username');
+        var passwordField = document.getElementById('password');
+        var rememberCheckbox = document.getElementById('remember');
+
+        if (remember) {
+            var username = localStorage.getItem('username');
+            var password = localStorage.getItem('password');
+            usernameField.value = username;
+            passwordField.value = password;
+            rememberCheckbox.checked = true;
+        } else {
+            usernameField.value = '';
+            passwordField.value = '';
+            rememberCheckbox.checked = false;
+        }
+        };
+    </script>    
+</body>
+</html>
